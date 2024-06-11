@@ -1,0 +1,120 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../../fonts/Roboto-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageContainer {
+  display: none;
+  margin-top: 35%;
+}
+
+.loginText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  margin-top: 26%;
+  color: black;
+}
+
+.phoneText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 5%;
+  color: black;
+  word-spacing: 0.5px;
+}
+
+.confirmationText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 2%;
+  color: black;
+  word-spacing: 0.5px;
+  margin-bottom: 2%;
+}
+
+.errorText {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.codeInputContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.codeInput {
+  width: 63px;
+  height: 58px;
+  margin: 0 5px;
+  text-align: center;
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: black;
+  background-color: #F5F5F5;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin-inline: 6%;
+
+}
+
+.resendText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 2%;
+  color: black;
+  word-spacing: 0.5px;
+  margin-top: 12%;
+}
+
+.createAccountText a {
+  color: black; /* Example link color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.createAccountText a:hover {
+  text-decoration: underline;
+}
+
+.continueButton {
+  width: 90%;
+  height: 48px;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-top: 10px; 
+  background-color: #F5F5F5; 
+  color: black; 
+  border: none;
+  cursor: pointer;
+  margin-top: 12%;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .imageContainer {
+    display: block;
+  }
+
+  .textContent {
+    display: none;
+  }
+}
