@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../page.module.css';
 import unitedKingdom from '../../../public/uk.png';
@@ -13,6 +13,16 @@ const HomePage = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isMobile, setIsMobile] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize(); // Check on initial load
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handlePhoneButtonClick = () => {
     if (phoneInputRef.current) {
@@ -106,50 +116,58 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <Image src="/SaveSum.png" alt="SaveSum" width={167} height={35} />
-      </div>
-      <p className={styles.loginText}>Log In</p>
-      <p className={styles.phoneText}>Enter your phone number</p>
-      <p className={styles.confirmationText}>We will send you a confirmation code</p>
-      <div className={styles.phoneButton} onClick={handlePhoneButtonClick}>
-        <div className={styles.flagImage}>
-          <Image src={unitedKingdom} alt="UK Flag" width={38} height={38} />
+    <>
+      {isMobile ? (
+        <div className={styles.container}>
+          <div className={styles.imageContainer}>
+            <Image src="/SaveSum.png" alt="SaveSum" width={167} height={35} />
+          </div>
+          <p className={styles.loginText}>Log In</p>
+          <p className={styles.phoneText}>Enter your phone number</p>
+          <p className={styles.confirmationText}>We will send you a confirmation code</p>
+          <div className={styles.phoneButton} onClick={handlePhoneButtonClick}>
+            <div className={styles.flagImage}>
+              <Image src={unitedKingdom} alt="UK Flag" width={38} height={38} />
+            </div>
+            <span>{phoneNumber || '+44 XXXXXXXXXXX'}</span>
+          </div>
+          <input
+            type="tel"
+            ref={phoneInputRef}
+            className={styles.phoneInput}
+            value={phoneNumber}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            placeholder="+44 XXXXXXXXXXX"
+          />
+          <p className={styles.textContent}>This is the text content that is displayed on larger screens.</p>
+          <p className={styles.orText}>OR</p>
+          <div className={styles.emailButton} onClick={handleEmailButtonClick}>
+            <span>{email || 'Enter your email'}</span>
+          </div>
+          <input
+            type="email"
+            ref={emailInputRef}
+            className={styles.emailInput}
+            value={email}
+            onChange={handleEmailChange}
+            onBlur={handleInputBlur}
+            placeholder="Enter your email"
+          />
+          <button className={styles.continueButton} onClick={handleContinueClick}>
+            Continue
+          </button>
+          {error && <p className={styles.errorText}>{error}</p>}
+          <p className={styles.createAccountText}>
+            Do not have an account? <a href="#">Create an account</a>
+          </p>
         </div>
-        <span>{phoneNumber || '+44 XXXXXXXXXXX'}</span>
-      </div>
-      <input
-        type="tel"
-        ref={phoneInputRef}
-        className={styles.phoneInput}
-        value={phoneNumber}
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
-        placeholder="+44 XXXXXXXXXXX"
-      />
-      <p className={styles.textContent}>This is the text content that is displayed on larger screens.</p>
-      <p className={styles.orText}>OR</p>
-      <div className={styles.emailButton} onClick={handleEmailButtonClick}>
-        <span>{email || 'Enter your email'}</span>
-      </div>
-      <input
-        type="email"
-        ref={emailInputRef}
-        className={styles.emailInput}
-        value={email}
-        onChange={handleEmailChange}
-        onBlur={handleInputBlur}
-        placeholder="Enter your email"
-      />
-      <button className={styles.continueButton} onClick={handleContinueClick}>
-        Continue
-      </button>
-      {error && <p className={styles.errorText}>{error}</p>}
-      <p className={styles.createAccountText}>
-        Do not have an account? <a href="#">Create an account</a>
-      </p>
-    </div>
+      ) : (
+        <div className={styles.desktopWarning}>
+          Please open this website on your phone, the website is not optimized for desktop use.
+        </div>
+      )}
+    </>
   );
 };
 
