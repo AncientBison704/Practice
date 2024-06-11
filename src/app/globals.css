@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.left-column {
+  flex: 1;
+  height: 100%;
+}
+
+.right-column {
+  flex: 1;
+  margin-left: 20px;
+  height: 100%;
+}
+
+.box {
+  padding: 20px;
+  margin-bottom: 15px;
+  height: 30%;
+}
+
+.mint-color {
+  background-color: #98ff98; 
+  height: 250px;
+}
+
+.light-blue {
+  background-color: #add8e6; 
+}
+
+.peach-red {
+  background-color: #ffcccb; 
+}
